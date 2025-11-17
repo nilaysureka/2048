@@ -1,6 +1,6 @@
 import tkinter as tk
 import random
-import colours as c
+import colors as c
 
 class Game(tk.Frame):
     def __init__(self):
@@ -22,7 +22,7 @@ class Game(tk.Frame):
         self.mainloop()
 import tkinter as tk
 import random
-import colours as c
+import colors as c
 
 class Game(tk.Frame):
     def __init__(self):
@@ -31,7 +31,7 @@ class Game(tk.Frame):
         self.master.title('2048')
 
         self.main_grid = tk.Frame(
-            self, bg=c.GRID_COLOUR, bd=3, width=400, height=400)
+            self, bg=c.GRID_color, bd=3, width=400, height=400)
         self.main_grid.grid(pady=(80, 0))
         self.make_GUI()
         self.start_game()
