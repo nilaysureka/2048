@@ -9,28 +9,6 @@ class Game(tk.Frame):
         self.master.title('2048')
 
         self.main_grid = tk.Frame(
-            self, bg=c.GRID_COLOR, bd=3, width=400, height=400)
-        self.main_grid.grid(pady=(80, 0))
-        self.make_GUI()
-        self.start_game()
-
-        self.master.bind("<Left>", self.left)
-        self.master.bind("<Right>", self.right)
-        self.master.bind("<Up>", self.up)
-        self.master.bind("<Down>", self.down)
-
-        self.mainloop()
-import tkinter as tk
-import random
-import colors as c
-
-class Game(tk.Frame):
-    def __init__(self):
-        tk.Frame.__init__(self)
-        self.grid()
-        self.master.title('2048')
-
-        self.main_grid = tk.Frame(
             self, bg=c.GRID_color, bd=3, width=400, height=400)
         self.main_grid.grid(pady=(80, 0))
         self.make_GUI()
@@ -99,3 +77,33 @@ class Game(tk.Frame):
             text="2")
 
         self.score = 0
+
+    # Matrix Manipulation Functions
+
+    def stack(self):
+        new_matrix = [[0] * 4 for _ in range(4)]
+        for i in range(4):
+            fill_position = 0
+            for j in range(4):
+                if self.matrix[i][j] != 0:
+                    new_matrix[i][fill_position] = self.matrix[i][j]
+                    fill_position += 1
+        self.matrix = new_matrix
+
+
+    def combine(self):
+        for i in range(4):
+            for j in range(3):
+                if self.matrix[i][j] != 0 and self.matrix[i][j] == self.matrix[i][j + 1]:
+                    self.matrix[i][j] *= 2
+                    self.matrix[i][j + 1] = 0
+                    self.score += self.matrix[i][j]
+
+
+    def reverse(self):
+        new_matrix = []
+        for i in range(4):
+            new_matrix.append([])
+            for j in range(4):
+                new_matrix[i].append(self.matrix[i][3 - j])
+        self.matrix = new_matrix
